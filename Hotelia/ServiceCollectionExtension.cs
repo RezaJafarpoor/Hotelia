@@ -1,8 +1,12 @@
-﻿using Hotelia.Shared.Middlewares;
+﻿using FluentValidation;
+using Hotelia.Features.HotelFeatures.CreateHotel;
+using Hotelia.Features.HotelFeatures.GetHotel;
+using Hotelia.Shared.Middlewares;
 using Hotelia.Shared.Persistence;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
-namespace Hotelia.Shared;
+namespace Hotelia;
 
 public static class ServiceCollectionExtension
 {
@@ -11,6 +15,7 @@ public static class ServiceCollectionExtension
         services.AddPersistence(configuration);
         services.AddScoped<ExceptionHandlingMiddleware>();
         services.AddScoped<RequestPerformanceMiddleware>();
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
     }
     
 
@@ -22,5 +27,12 @@ public static class ServiceCollectionExtension
                 .EnableSensitiveDataLogging()
                 .EnableDetailedErrors();
         });
+    }
+
+
+    public static void RegisterEndpoints(this IEndpointRouteBuilder app)
+    {
+        app.GetHotelEndpoint();
+        app.CreateHotelEndpoint();
     }
 }

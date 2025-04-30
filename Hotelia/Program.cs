@@ -1,27 +1,22 @@
-using Hotelia.Shared;
+using Hotelia;
 using Hotelia.Shared.Middlewares;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((context, config) => config.ReadFrom.Configuration(context.Configuration));
-
-
-
-
+builder.Services.AddSwaggerGen();
+builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddServices(builder.Configuration);
-var app = builder.Build();
-
-
-
+WebApplication app = builder.Build();
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.UseMiddleware<RequestPerformanceMiddleware>();
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
-app.MapGet("/", async (ILogger<Program> logger) =>
-{
-    return "Hello World!";
-}).WithName("Reza")
-.WithMetadata("Reza");
-
+app.RegisterEndpoints();
 
 app.Run();

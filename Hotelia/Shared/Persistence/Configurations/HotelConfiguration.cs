@@ -9,7 +9,8 @@ public class HotelConfiguration : IEntityTypeConfiguration<Hotel>
     public void Configure(EntityTypeBuilder<Hotel> builder)
     {
         builder.HasKey(h => h.Id);
-        builder.Property(h => h.Name).IsRequired();
+        builder.Property(h => h.Name)
+            .IsRequired();
         builder.OwnsOne(h => h.Address, owned =>
         {
             owned.Property(a => a.City).IsRequired();

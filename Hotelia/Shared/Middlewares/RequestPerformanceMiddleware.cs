@@ -14,7 +14,7 @@ public class RequestPerformanceMiddleware(ILogger<RequestPerformanceMiddleware> 
         await next(context);
         stopWatch.Stop();
         
-        if (stopWatch.Elapsed.Seconds < upperLimit)
+        if (stopWatch.Elapsed.Seconds > upperLimit)
         {
             logger.LogWarning(BuildLog(context, stopWatch.ElapsedMilliseconds, upperLimit) );
         }
