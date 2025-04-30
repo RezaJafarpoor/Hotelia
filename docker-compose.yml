@@ -1,0 +1,17 @@
+﻿services:
+  sql-server:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: HoteliaDb
+    ports:
+      - "1433:1433"
+    environment:
+      - "ACCEPT_EULA=Y"
+      - "MSSQL_SA_PASSWORD=Reza1234@"
+  seq:
+    image: datalust/seq
+    container_name: seq
+    environment:
+      - "ACCEPT_EULA=Y"
+    ports:
+      - "5341:5341"
+      - "9091:80"

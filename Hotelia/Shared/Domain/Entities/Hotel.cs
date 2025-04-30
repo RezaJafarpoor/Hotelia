@@ -7,7 +7,7 @@ namespace Hotelia.Shared.Domain.Entities;
 public class Hotel : Aggregate<Guid>
 {
     public string Name { get; set; } = string.Empty;
-    public Address Address { get; set; }
+    public Address Address { get; set; } = default!;
     public string ImageUrl { get; set; } = string.Empty;
     public HotelType HotelType { get; set; }
     public List<Room> Rooms { get; set; } = new();

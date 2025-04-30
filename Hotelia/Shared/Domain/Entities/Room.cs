@@ -10,6 +10,7 @@ public class Room : Entity<Guid>
     public RoomStatus Status { get; set; }
     public string? ImageUrl { get; set; } = string.Empty;
     public List<RoomOption> RoomOptions { get; set; } = new();
+    public Guid HotelId { get; set; }
     
     public Room()
     {
