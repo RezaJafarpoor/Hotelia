@@ -1,4 +1,4 @@
-﻿namespace Hotelia.Shared.DDD;
+﻿namespace Hotelia.Shared.Domain.DDD;
 
 public interface IAggregate : IEntity
 {

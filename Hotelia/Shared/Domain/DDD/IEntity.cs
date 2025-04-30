@@ -1,10 +1,14 @@
-﻿namespace Hotelia.Shared.DDD;
+﻿namespace Hotelia.Shared.Domain.DDD;
 
-public abstract class Entity<T> : IEntity<T>
+public interface IEntity
 {
-    public T Id { get; set; }
     public DateTime? CreatedAt { get; set; }
     public string? CreatedBy { get; set; }
     public DateTime? ModifiedAt { get; set; }
     public string? ModifiedBy { get; set; }
+}
+
+public interface IEntity<T> : IEntity
+{
+    public T Id { get; set; }
 }
