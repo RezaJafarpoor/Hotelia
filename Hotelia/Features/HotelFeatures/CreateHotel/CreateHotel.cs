@@ -1,6 +1,7 @@
 ﻿using Hotelia.Shared.Domain.Entities;
 using Hotelia.Shared.Domain.Enums;
 using Hotelia.Shared.Domain.ValueObjects;
+using Hotelia.Shared.EndpointFilters;
 using Hotelia.Shared.Persistence;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -23,5 +24,7 @@ public static class CreateHotel
                         : Results.BadRequest();
                 }).WithName("Create Hotel")
             .Produces<Created>(StatusCodes.Status201Created)
-            .ProducesProblem(StatusCodes.Status400BadRequest);
+            .ProducesProblem(StatusCodes.Status400BadRequest)
+            .AddEndpointFilter<LoggingFilter<CreateHotelDto>>()
+            .AddEndpointFilter<ValidationFilter<CreateHotelDto>>();
 }

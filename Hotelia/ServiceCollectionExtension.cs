@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using FluentValidation.AspNetCore;
 using Hotelia.Features.HotelFeatures.CreateHotel;
 using Hotelia.Features.HotelFeatures.GetHotel;
 using Hotelia.Shared.Middlewares;
@@ -15,7 +16,8 @@ public static class ServiceCollectionExtension
         services.AddPersistence(configuration);
         services.AddScoped<ExceptionHandlingMiddleware>();
         services.AddScoped<RequestPerformanceMiddleware>();
-        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly())
+            .AddFluentValidationAutoValidation();
     }
     
 

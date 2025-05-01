@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hotelia.Features.HotelFeatures.GetHotel;
 
-public record HotelDto(string Name, Address Address, string ImageUrl, HotelType Type, List<Room> Rooms)
+public record HotelDto(string Name, Address Address, string ImageUrl, string Type, List<Room> Rooms)
 {
     public static HotelDto MapToDto(Hotel hotel)
     {
-        return new HotelDto(hotel.Name, hotel.Address, hotel.ImageUrl, hotel.HotelType, hotel.Rooms);
+        return new HotelDto(hotel.Name, hotel.Address, hotel.ImageUrl, hotel.HotelType.ToString(), hotel.Rooms);
     }
 }
 
