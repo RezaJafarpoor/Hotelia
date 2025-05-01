@@ -31,9 +31,7 @@ public class GetRoom : IEndpoint
             .Produces<RoomDto>()
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .ProducesProblem(StatusCodes.Status404NotFound)
-            .AddEndpointFilter<LoggingFilter<GetRoom>>()
-            .AddEndpointFilter<ValidationFilter<GetRoom>>();
-    
+            .AddEndpointFilter<LoggingFilter<GetRoom>>();
     private  RoomDto MapToRoomDto(Room room) =>
         new(room.Price, room.Type, room.Status, room.ImageUrl, room.RoomOptions);
         

@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 using Hotelia.Features.RoomFeatures.CreateRoom;
 using Hotelia.Features.RoomFeatures.UpdateRoom;
-using Microsoft.EntityFrameworkCore;
 
 namespace Hotelia.Features.RoomFeatures;
 
