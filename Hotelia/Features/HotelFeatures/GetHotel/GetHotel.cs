@@ -1,4 +1,5 @@
-﻿using Hotelia.Shared.Domain.Entities;
+﻿using Hotelia.Shared.Common;
+using Hotelia.Shared.Domain.Entities;
 using Hotelia.Shared.Domain.Enums;
 using Hotelia.Shared.Domain.ValueObjects;
 using Hotelia.Shared.Persistence;
@@ -16,9 +17,9 @@ public record HotelDto(string Name, Address Address, string ImageUrl, string Typ
     }
 }
 
-public static class GetHotel
+public class GetHotel : IEndpoint
 {
-    public static void GetHotelEndpoint(this IEndpointRouteBuilder app)
+    public void RegisterEndpoint(IEndpointRouteBuilder app)
         => app.MapGet("api/hotel/{id}", async ([FromQuery] string id, HoteliaContext dbContext) =>
             {
                 Guid.TryParse(id, out var hotelId);

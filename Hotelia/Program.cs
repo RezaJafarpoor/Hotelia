@@ -16,7 +16,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseMiddleware<RequestPerformanceMiddleware>();
 app.UseMiddleware<ExceptionHandlingMiddleware>();
-
 app.RegisterEndpoints();
 
 app.Run();

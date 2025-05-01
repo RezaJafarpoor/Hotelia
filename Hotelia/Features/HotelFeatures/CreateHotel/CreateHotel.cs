@@ -1,4 +1,5 @@
-﻿using Hotelia.Shared.Domain.Entities;
+﻿using Hotelia.Shared.Common;
+using Hotelia.Shared.Domain.Entities;
 using Hotelia.Shared.Domain.Enums;
 using Hotelia.Shared.Domain.ValueObjects;
 using Hotelia.Shared.EndpointFilters;
@@ -11,9 +12,9 @@ namespace Hotelia.Features.HotelFeatures.CreateHotel;
 public record CreateHotelDto(string Name, Address Address, string ImageUrl, HotelType Type);
 
 
-public static class CreateHotel
+public  class CreateHotel :IEndpoint
 {
-    public static void CreateHotelEndpoint(this IEndpointRouteBuilder app)
+    public  void RegisterEndpoint(IEndpointRouteBuilder app)
         => app.MapPost("api/hotel",
                 async ([FromBody] CreateHotelDto dto, HoteliaContext dbContext, CancellationToken cancellationToken) =>
                 {

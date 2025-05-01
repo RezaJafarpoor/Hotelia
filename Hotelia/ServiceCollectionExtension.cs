@@ -2,6 +2,7 @@
 using FluentValidation.AspNetCore;
 using Hotelia.Features.HotelFeatures.CreateHotel;
 using Hotelia.Features.HotelFeatures.GetHotel;
+using Hotelia.Shared.Common;
 using Hotelia.Shared.Middlewares;
 using Hotelia.Shared.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -34,7 +35,15 @@ public static class ServiceCollectionExtension
 
     public static void RegisterEndpoints(this IEndpointRouteBuilder app)
     {
-        app.GetHotelEndpoint();
-        app.CreateHotelEndpoint();
+        var assembly = Assembly.GetExecutingAssembly();
+        var iEndpoint = typeof(IEndpoint);
+        var endpoints = assembly.GetTypes()
+            .Where(t => t is { IsClass: true, IsAbstract: false } && iEndpoint.IsAssignableFrom(t));
+        
+        foreach (var endpoint in endpoints)
+        {
+            var instance = Activator.CreateInstance(endpoint) as IEndpoint;
+            instance?.RegisterEndpoint(app);
+        }
     }
 }
