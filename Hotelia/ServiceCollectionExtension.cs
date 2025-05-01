@@ -3,6 +3,7 @@ using FluentValidation.AspNetCore;
 using Hotelia.Features.HotelFeatures.CreateHotel;
 using Hotelia.Features.HotelFeatures.GetHotel;
 using Hotelia.Shared.Common;
+using Hotelia.Shared.Documents;
 using Hotelia.Shared.Middlewares;
 using Hotelia.Shared.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,7 @@ public static class ServiceCollectionExtension
 {
     public static void AddServices(this IServiceCollection services, IConfiguration configuration)
     {
+        services.Swagger();
         services.AddPersistence(configuration);
         services.AddScoped<ExceptionHandlingMiddleware>();
         services.AddScoped<RequestPerformanceMiddleware>();
@@ -45,5 +47,14 @@ public static class ServiceCollectionExtension
             var instance = Activator.CreateInstance(endpoint) as IEndpoint;
             instance?.RegisterEndpoint(app);
         }
+    }
+
+    private static void Swagger(this IServiceCollection services)
+    {
+        services.AddSwaggerGen(option =>
+        {
+            option.UseInlineDefinitionsForEnums();
+            option.SchemaFilter<EnumAsStringSchemaFilter>();
+        });
     }
 }

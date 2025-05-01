@@ -31,6 +31,13 @@ public class Hotel : Aggregate<Guid>
     public static Hotel Create(string name, Address address, string? imageUrl, HotelType type) 
         => new(name, address, imageUrl, type);
 
+    public  void Update(string? name, Address? address, string? imageUrl)
+    {
+        Name = name ?? Name;
+        Address = address ?? Address;
+        ImageUrl = imageUrl ?? ImageUrl;
+    }
+
     public void AddRoom(Room room)
         => Rooms.Add(room);
 
