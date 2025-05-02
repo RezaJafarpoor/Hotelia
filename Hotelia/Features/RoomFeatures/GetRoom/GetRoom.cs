@@ -11,7 +11,6 @@ namespace Hotelia.Features.RoomFeatures.GetRoom;
 public record RoomDto(
     int Price,
     RoomType RoomType,
-    RoomStatus RoomStatus,
     string? ImageUrl,
     List<RoomOption>? RoomOptions);
 
@@ -33,7 +32,7 @@ public class GetRoom : IEndpoint
             .ProducesProblem(StatusCodes.Status404NotFound)
             .AddEndpointFilter<LoggingFilter<GetRoom>>();
     private  RoomDto MapToRoomDto(Room room) =>
-        new(room.Price, room.Type, room.Status, room.ImageUrl, room.RoomOptions);
+        new(room.Price, room.Type, room.ImageUrl, room.RoomOptions);
         
     
 }

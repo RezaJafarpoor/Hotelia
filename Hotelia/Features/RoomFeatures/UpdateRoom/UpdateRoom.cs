@@ -10,7 +10,6 @@ namespace Hotelia.Features.RoomFeatures.UpdateRoom;
 public record UpdateRoomDto(
     int? Price,
     RoomType? RoomType,
-    RoomStatus? RoomStatus,
     string? ImageUrl,
     List<RoomOption>? RoomOptions);
 
@@ -24,7 +23,7 @@ public class UpdateRoom : IEndpoint
                 cancellationToken);
             if (room is null)
                 return Results.NotFound();
-            room.Update(dto.Price, dto.RoomType, dto.RoomStatus, dto.ImageUrl, dto.RoomOptions);
+            room.Update(dto.Price, dto.RoomType, dto.ImageUrl, dto.RoomOptions);
             await dbContext.SaveChangesAsync(cancellationToken);
             return Results.NoContent();
         })
