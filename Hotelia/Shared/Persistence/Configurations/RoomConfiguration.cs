@@ -10,8 +10,7 @@ public class RoomConfiguration : IEntityTypeConfiguration<Room>
     {
         builder.HasKey(r => r.Id);
         builder.Property(r => r.Price).IsRequired();
-        builder.Property(r => r.Status).IsRequired();
-        builder.Property(r => r.Type).IsRequired();
+        builder.Property(r => r.Type).IsRequired().HasConversion<string>();
         // one to many is in  Hotel Configuration file 
     }
 }

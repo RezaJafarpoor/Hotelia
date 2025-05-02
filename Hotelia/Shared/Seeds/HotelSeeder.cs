@@ -27,7 +27,6 @@ public class HotelSeeder(HoteliaContext dbContext) : ISeeder
         options.Add(RoomOption.HasGasOven);
         var roomFaker = new Faker<Room>();
         roomFaker.RuleFor(r => r.Price, f => f.Random.Int(100000, 10000000))
-            .RuleFor(r => r.Status, RoomStatus.Available)
             .RuleFor(r => r.Type, RoomType.KingSizeBed)
             .RuleFor(r => r.RoomOptions, options);
         var rooms = roomFaker.Generate(20);
