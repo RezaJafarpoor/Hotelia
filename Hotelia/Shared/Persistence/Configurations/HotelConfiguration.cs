@@ -21,6 +21,7 @@ public class HotelConfiguration : IEntityTypeConfiguration<Hotel>
         builder.Property(h => h.HotelType)
             .HasConversion<string>();
         builder.Property(h => h.HotelType).IsRequired();
+        
         builder.HasMany(h =>h.Rooms)
             .WithOne()
             .HasForeignKey("HotelId")
