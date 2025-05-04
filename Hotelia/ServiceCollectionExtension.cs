@@ -69,6 +69,8 @@ public static class ServiceCollectionExtension
 
     private static void Auth(this IServiceCollection services, IConfiguration configuration)
     {
+
+        services.AddScoped<TokenGenerator>();
         services.AddAuthorization();
         services.AddIdentity<User, IdentityRole>()
             .AddEntityFrameworkStores<HoteliaContext>()

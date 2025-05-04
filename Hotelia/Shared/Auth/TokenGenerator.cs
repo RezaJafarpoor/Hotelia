@@ -1,8 +1,7 @@
 ﻿using Hotelia.Shared.Domain.Entities;
-using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
+using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -16,9 +15,11 @@ public sealed class TokenGenerator(IOptions<JwtConfig> jwtConfig)
         var secretKey = jwtConfig.Value.Secret;
         var claims = new List<Claim>()
         {
-            new(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-            new(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Aud, jwtConfig.Value.Audience)
+            new(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+            new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new(JwtRegisteredClaimNames.Aud, jwtConfig.Value.Audience),
+            new(JwtRegisteredClaimNames.Iss, jwtConfig.Value.Issuer),
+            new(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString())
         };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfig.Value.Secret));
