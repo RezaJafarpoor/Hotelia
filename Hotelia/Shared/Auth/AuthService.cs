@@ -1,4 +1,5 @@
-﻿using Hotelia.Shared.Auth.Dtos;
+﻿using Hotelia.Features.IdentityFeatures.CreateUser;
+using Hotelia.Shared.Auth.Dtos;
 using Hotelia.Shared.Common;
 using Hotelia.Shared.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
@@ -14,7 +15,7 @@ public class AuthService
 
     public async Task<Result<AuthResponse>> CreateAccount(CreateUserDto dto)
     {
-        var user = new User { Email = dto.Email };
+        var user = new User { Email = dto.Email, UserName = dto.Email};
         
         var createdUser = await userManager.CreateAsync(user);
         if (!createdUser.Succeeded)

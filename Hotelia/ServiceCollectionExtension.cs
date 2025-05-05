@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Reflection;
 using System.Security;
@@ -25,6 +26,7 @@ public static class ServiceCollectionExtension
     public static void AddServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.Swagger();
+        services.Auth(configuration);
         services.AddPersistence(configuration);
         services.AddScoped<ExceptionHandlingMiddleware>();
         services.AddScoped<RequestPerformanceMiddleware>();
@@ -62,6 +64,22 @@ public static class ServiceCollectionExtension
     {
         services.AddSwaggerGen(option =>
         {
+            var jwtSchema = new OpenApiSecurityScheme
+            {
+                Scheme = "bearer",
+                BearerFormat = "Json Web Token",
+                Name = "Authorization",
+                In = ParameterLocation.Header,
+                Type = SecuritySchemeType.Http,
+                Description = "Enter A Valid Json Web Token below.",
+                Reference = new OpenApiReference
+                {
+                    Id = JwtBearerDefaults.AuthenticationScheme,
+                    Type = ReferenceType.SecurityScheme
+                }
+                
+            };
+            option.AddSecurityDefinition(jwtSchema.Reference.Id, jwtSchema);
             option.UseInlineDefinitionsForEnums();
             option.SchemaFilter<EnumAsStringSchemaFilter>();
         });
@@ -69,10 +87,10 @@ public static class ServiceCollectionExtension
 
     private static void Auth(this IServiceCollection services, IConfiguration configuration)
     {
-
+        services.AddScoped<AuthService>();
         services.AddScoped<TokenGenerator>();
         services.AddAuthorization();
-        services.AddIdentity<User, IdentityRole>()
+        services.AddIdentity<User, IdentityRole<Guid>>()
             .AddEntityFrameworkStores<HoteliaContext>()
             .AddDefaultTokenProviders();
 

@@ -1,5 +1,13 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿namespace Hotelia.Shared.Auth;
 
-namespace Hotelia.Shared.Auth;
-
-public record JwtConfig(string Issuer, string Audience, string Secret,int ExpiryInMinute);
+public class JwtConfig
+{
+    public string Issuer { get;set; }
+    public string Audience { get;set; }
+    public string Secret { get;set; }
+    public int ExpiryInMinute { get;set; }
+    public JwtConfig()
+    {
+        
+    }
+}
