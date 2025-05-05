@@ -27,5 +27,6 @@ public class CreateRoom : IEndpoint
         .Produces<CreateRoomDto>(StatusCodes.Status201Created)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .AddEndpointFilter<LoggingFilter<CreateRoom>>()
-        .AddEndpointFilter<ValidationFilter<CreateRoomDto>>();
+        .AddEndpointFilter<ValidationFilter<CreateRoomDto>>()
+        .WithTags("Room");
 }

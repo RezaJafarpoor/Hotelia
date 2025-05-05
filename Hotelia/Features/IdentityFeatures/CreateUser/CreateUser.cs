@@ -19,9 +19,10 @@ public class CreateUser: IEndpoint
                 Results.Ok(result.Data) :
                 Results.BadRequest(result.Errors);
         })
-        .WithName("Sign Up")
+        .WithName("Create User")
         .Produces<AuthResponse>()
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .AddEndpointFilter<LoggingFilter<CreateUser>>()
-        .AddEndpointFilter<ValidationFilter<CreateUserDto>>();
+        .AddEndpointFilter<ValidationFilter<CreateUserDto>>()
+        .WithTags("Identity");
 }

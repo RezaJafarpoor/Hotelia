@@ -23,5 +23,6 @@ public class DeleteRoom : IEndpoint
             .Produces(StatusCodes.Status204NoContent)
             .ProducesProblem(StatusCodes.Status404NotFound)
             .ProducesProblem(StatusCodes.Status400BadRequest)
-            .AddEndpointFilter<LoggingFilter<DeleteRoom>>();
+            .AddEndpointFilter<LoggingFilter<DeleteRoom>>()
+            .WithTags("Room");
 }

@@ -1,4 +1,5 @@
 ﻿using Hotelia.Features.IdentityFeatures.CreateUser;
+using Hotelia.Features.IdentityFeatures.LoginUser;
 using Hotelia.Shared.Auth.Dtos;
 using Hotelia.Shared.Common;
 using Hotelia.Shared.Domain.Entities;
