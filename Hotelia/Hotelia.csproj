@@ -29,6 +29,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Features\ReserveFeatures\" />
       <Folder Include="Features\RoomFeatures\GetRooms\" />
       <Folder Include="Shared\Persistence\Migrations\" />
     </ItemGroup>
