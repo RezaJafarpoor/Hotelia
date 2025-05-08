@@ -16,7 +16,7 @@ public class CreateRoom : IEndpoint
     public void RegisterEndpoint(IEndpointRouteBuilder app)
         => app.MapPost("api/hotel/{hotelId}/room", async ([FromRoute] Guid hotelId,[FromBody]CreateRoomDto dto, HoteliaContext dbContext, CancellationToken cancellationToken) =>
         {
-            var room = Room.Create(dto.Price, dto.RoomType, dto.ImageUrl, dto.RoomOptions);
+            var room = Room.Create(dto.Price, dto.RoomType, dto.ImageUrl, dto.RoomStatus, dto.RoomOptions);
             var hotel = await dbContext.Hotels.Include(h => h.Rooms).SingleOrDefaultAsync(h => h.Id == hotelId, cancellationToken);
             if (hotel is null)
                 return Results.BadRequest("Hotel Does Not Exist");
@@ -27,5 +27,6 @@ public class CreateRoom : IEndpoint
         .Produces<CreateRoomDto>(StatusCodes.Status201Created)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .AddEndpointFilter<LoggingFilter<CreateRoom>>()
-        .AddEndpointFilter<ValidationFilter<CreateRoomDto>>();
+        .AddEndpointFilter<ValidationFilter<CreateRoomDto>>()
+        .WithTags("Room");
 }

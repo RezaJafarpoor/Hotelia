@@ -33,7 +33,8 @@ public class GetHotel : IEndpoint
             }).WithName("Get Hotel")
             .Produces<HotelDto>()
             .ProducesProblem(StatusCodes.Status404NotFound)
-            .ProducesProblem(StatusCodes.Status400BadRequest);
+            .ProducesProblem(StatusCodes.Status400BadRequest)
+            .WithTags("Hotel");
 
 }
  

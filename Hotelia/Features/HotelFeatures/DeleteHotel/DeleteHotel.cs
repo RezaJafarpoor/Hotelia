@@ -20,5 +20,6 @@ public class DeleteHotel : IEndpoint
         }).WithName("Delete Hotel")
         .Produces<NotFound>(StatusCodes.Status404NotFound)
         .Produces<NoContent>(StatusCodes.Status204NoContent)
-        .AddEndpointFilter<LoggingFilter<DeleteHotel>>();
+        .AddEndpointFilter<LoggingFilter<DeleteHotel>>()
+        .WithTags("Hotel");
 }

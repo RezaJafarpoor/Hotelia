@@ -10,7 +10,7 @@ public class Hotel : Aggregate<Guid>
     public Address Address { get; set; } = default!;
     public string ImageUrl { get; set; } = string.Empty;
     public HotelType HotelType { get; set; }
-    public List<Room> Rooms { get; set; } = new();
+    public List<Room> Rooms { get; set; } = [];
 
     public Hotel()
     {

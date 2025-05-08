@@ -27,5 +27,6 @@ public  class CreateHotel :IEndpoint
             .Produces<Created>(StatusCodes.Status201Created)
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .AddEndpointFilter<LoggingFilter<CreateHotelDto>>()
-            .AddEndpointFilter<ValidationFilter<CreateHotelDto>>();
+            .AddEndpointFilter<ValidationFilter<CreateHotelDto>>()
+            .WithTags("Hotel");
 }

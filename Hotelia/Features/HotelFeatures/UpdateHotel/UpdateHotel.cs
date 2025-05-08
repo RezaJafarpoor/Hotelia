@@ -29,7 +29,8 @@ public class UpdateHotel : IEndpoint
         .Produces<NotFound>(StatusCodes.Status404NotFound)
         .Produces<NoContent>(StatusCodes.Status204NoContent)
         .AddEndpointFilter<LoggingFilter<UpdateHotel>>()
-        .AddEndpointFilter<ValidationFilter<UpdateHotelDto>>();
+        .AddEndpointFilter<ValidationFilter<UpdateHotelDto>>()
+        .WithTags("Hotel");
     
     
 }

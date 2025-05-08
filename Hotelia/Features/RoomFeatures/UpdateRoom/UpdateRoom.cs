@@ -32,5 +32,6 @@ public class UpdateRoom : IEndpoint
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .ProducesProblem(StatusCodes.Status404NotFound)
         .AddEndpointFilter<LoggingFilter<UpdateRoom>>()
-        .AddEndpointFilter<ValidationFilter<UpdateRoom>>();
+        .AddEndpointFilter<ValidationFilter<UpdateRoom>>()
+        .WithTags("Room");
 }
